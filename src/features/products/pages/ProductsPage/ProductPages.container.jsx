@@ -52,7 +52,7 @@ const ProductPagesContainer = () => {
 
   return (
     <div className="container py-5">
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex justify-content-between align-items-center mb-5">
         <h1 className="fw-bold mb-0 text-dark">Products</h1>
         <Link
           to="/create"
@@ -62,67 +62,83 @@ const ProductPagesContainer = () => {
         </Link>
       </div>
 
-      <div className="row g-4">
+      <div className="row g-3 g-md-4">
         {products.map((product) => (
           <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
             <div
-              className="card h-100 border-0 shadow-sm hover-shadow transition-all"
+              className="card h-100 border-0 shadow-sm hover-shadow transition-all product-card"
               style={{
                 borderRadius: "1rem",
                 overflow: "hidden",
-                cursor: "pointer",
+                position: "relative",
               }}
             >
+              {/* Image & Overlay Actions */}
               <div
-                className="position-relative"
+                className="position-relative bg-white"
                 style={{
                   height: "250px",
                   overflow: "hidden",
-                  backgroundColor: "#fff",
                 }}
               >
-                <Link to={`/product/${product.id}`}>
+                <Link
+                  to={`/product/${product.id}`}
+                  className="d-block w-100 h-100"
+                >
                   <img
                     src={product.image}
-                    className="card-img-top w-100 h-100 object-fit-contain p-4 transition-transform"
+                    className="card-img-top w-100 h-100 object-fit-contain p-4 product-image"
                     alt={product.title}
-                    style={{ transition: "transform 0.3s ease" }}
                   />
                 </Link>
               </div>
-              <div className="card-body d-flex flex-column bg-white">
+
+              {/* Card Body */}
+              <div className="card-body d-flex flex-column bg-white pt-3">
+                <div className="mb-2">
+                  <small
+                    className="text-muted text-uppercase fw-semibold"
+                    style={{ fontSize: "0.75rem", letterSpacing: "0.5px" }}
+                  >
+                    {product.category}
+                  </small>
+                </div>
                 <Link
                   to={`/product/${product.id}`}
-                  className="text-decoration-none text-dark"
+                  className="text-decoration-none text-dark mb-2"
                 >
                   <h5
-                    className="card-title text-truncate fw-bold mb-1"
+                    className="card-title text-truncate fw-bold mb-0"
                     title={product.title}
                   >
                     {product.title}
                   </h5>
                 </Link>
-                <p className="card-text text-muted small mb-2 text-capitalize">
-                  {product.category}
-                </p>
-                <div className="mt-auto d-flex justify-content-between align-items-center">
+
+                <div className="mt-auto pt-2 d-flex justify-content-between align-items-center">
                   <span className="fs-5 fw-bold text-primary">
                     ${product.price}
                   </span>
-                  <div>
+
+                  <div className="d-flex gap-2">
                     <Link
                       to={`/edit/${product.id}`}
-                      className="btn btn-outline-secondary btn-sm me-2 rounded-circle"
+                      className="btn btn-sm btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center"
+                      style={{ width: "32px", height: "32px" }}
                       title="Edit"
                     >
-                      <i className="bi bi-pencil-fill"></i>E
+                      <i className="bi bi-pencil-fill small"></i>
                     </Link>
                     <button
-                      onClick={() => handleDelete(product.id)}
-                      className="btn btn-outline-danger btn-sm rounded-circle"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleDelete(product.id);
+                      }}
+                      className="btn btn-sm btn-outline-danger rounded-circle d-flex align-items-center justify-content-center"
+                      style={{ width: "32px", height: "32px" }}
                       title="Delete"
                     >
-                      <i className="bi bi-trash-fill"></i>X
+                      <i className="bi bi-trash-fill small"></i>
                     </button>
                   </div>
                 </div>
@@ -135,13 +151,16 @@ const ProductPagesContainer = () => {
       <style>{`
         .hover-shadow:hover {
             transform: translateY(-5px);
-            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+            box-shadow: 0 1rem 3rem rgba(0,0,0,.15)!important;
         }
         .transition-all {
             transition: all 0.3s ease;
         }
         .object-fit-contain {
             object-fit: contain;
+        }
+        .product-card:hover .product-image {
+            transform: scale(1.05);
         }
       `}</style>
     </div>

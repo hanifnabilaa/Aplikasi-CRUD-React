@@ -60,7 +60,7 @@ const ProductDetailContainer = () => {
         style={{ borderRadius: "1rem", overflow: "hidden" }}
       >
         <div className="row g-0">
-          <div className="col-md-5 bg-white d-flex align-items-center justify-content-center p-5">
+          <div className="col-md-5 bg-white d-flex align-items-center justify-content-center p-4 p-md-5">
             <img
               src={product.image}
               className="img-fluid object-fit-contain"
