@@ -81,20 +81,27 @@ const ProductPagesContainer = () => {
                   backgroundColor: "#fff",
                 }}
               >
-                <img
-                  src={product.image}
-                  className="card-img-top w-100 h-100 object-fit-contain p-4 transition-transform"
-                  alt={product.title}
-                  style={{ transition: "transform 0.3s ease" }}
-                />
+                <Link to={`/product/${product.id}`}>
+                  <img
+                    src={product.image}
+                    className="card-img-top w-100 h-100 object-fit-contain p-4 transition-transform"
+                    alt={product.title}
+                    style={{ transition: "transform 0.3s ease" }}
+                  />
+                </Link>
               </div>
               <div className="card-body d-flex flex-column bg-white">
-                <h5
-                  className="card-title text-truncate fw-bold mb-1"
-                  title={product.title}
+                <Link
+                  to={`/product/${product.id}`}
+                  className="text-decoration-none text-dark"
                 >
-                  {product.title}
-                </h5>
+                  <h5
+                    className="card-title text-truncate fw-bold mb-1"
+                    title={product.title}
+                  >
+                    {product.title}
+                  </h5>
+                </Link>
                 <p className="card-text text-muted small mb-2 text-capitalize">
                   {product.category}
                 </p>
